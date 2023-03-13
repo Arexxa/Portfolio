@@ -35,7 +35,7 @@ function Home() {
               <p className="line__2">
                 A{" "}
                 <span className="text-primary text-xl md:text-4xl lg:text-4xl">
-                  Fronted Developer
+                  Frontend Developer
                 </span>
               </p>
               <p className="line__3 md:text-xl lg:text-xl">
