@@ -1,0 +1,33 @@
+/*
+ * DESIGN TOKENS — single source of truth for the theme.
+ * CUSTOMIZE: change the values here and Tailwind utilities, glass panels and
+ * (via lib/constants.ts COLORS) the 3D scene should be kept in sync.
+ */
+:root {
+  --void: #04060d;
+  --navy-900: #070b18;
+  --navy-800: #0b1226;
+  --navy-700: #111a35;
+  --ink: #e8ecf8;
+  --ink-muted: #9aa6c4;
+  --cyan: #22d3ee;
+  --violet: #8b5cf6;
+  --ember: #ff8a3d;
+  --glass-bg: rgb(11 18 38 / 0.62);
+  --glass-border: rgb(148 163 255 / 0.18);
+
+  --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.5rem;
+
+  --shadow-glow-cyan: 0 0 32px -4px rgb(34 211 238 / 0.45);
+  --shadow-glow-violet: 0 0 32px -4px rgb(139 92 246 / 0.45);
+  --shadow-glass: 0 24px 80px -24px rgb(0 0 0 / 0.8);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 160ms;
+  --duration-base: 320ms;
+}

@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+@theme inline {
+  --color-void: var(--void);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-cyan-glow: var(--cyan);
+  --color-violet-glow: var(--violet);
+  --color-ember: var(--ember);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --radius-glass: var(--radius-lg);
+  --shadow-glow-cyan: var(--shadow-glow-cyan);
+  --shadow-glow-violet: var(--shadow-glow-violet);
+  --shadow-glass: var(--shadow-glass);
+  --ease-out-expo: var(--ease-out-expo);
+}
+
+@layer base {
+  html {
+    background: var(--void);
+    color: var(--ink);
+    font-family: var(--font-display);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background: var(--void);
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--violet);
+    color: white;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, var(--cyan), var(--violet) 55%, var(--ember));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .static-sky {
+    background:
+      radial-gradient(ellipse at 20% 10%, rgb(139 92 246 / 0.22), transparent 55%),
+      radial-gradient(ellipse at 85% 70%, rgb(34 211 238 / 0.16), transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgb(255 138 61 / 0.1), transparent 55%), var(--void);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
