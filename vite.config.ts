@@ -4,14 +4,22 @@ import tailwindcss from '@tailwindcss/vite'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 
-/** Splits heavy vendors so the first paint only downloads the app shell. */
+/**
+ * Splits heavy vendors so the first paint only downloads the app shell. Three.js and the
+ * post-processing stack are only reached through dynamic imports, so they stay out of the
+ * initial bundle. Motion is left to natural splitting so its lazy drag features stay lazy.
+ */
 const codeSplitting = {
   groups: [
     { name: 'vendor-react', test: /node_modules[/](react|react-dom|scheduler)[/]/, priority: 30 },
-    { name: 'vendor-motion', test: /node_modules[/](gsap|@gsap|lenis)[/]/, priority: 20 },
+    {
+      name: 'vendor-postfx',
+      test: /node_modules[/](postprocessing|@react-three[/]postprocessing|n8ao|maath)[/]/,
+      priority: 20,
+    },
     {
       name: 'vendor-three',
-      test: /node_modules[/](three|@react-three|three-stdlib|troika[^/]*|its-fine|zustand|suspend-react|meshline|maath|camera-controls|detect-gpu)[/]/,
+      test: /node_modules[/](three|@react-three|its-fine|zustand|suspend-react|react-use-measure)[/]/,
       priority: 10,
     },
   ],
