@@ -1,28 +1,37 @@
+import { Container } from '@/components/layout/Container'
 import { site } from '@/data/site'
 import { socials } from '@/data/socials'
-import { Container } from '@/components/layout/Container'
 
-/** Page footer, pinned to the bottom of the last flight stop. */
+/** Page footer, written as the end of a log file. */
 export function Footer() {
   return (
-    <footer className="absolute inset-x-0 bottom-0 z-10 pb-5 text-sm text-ink-muted">
-      <Container className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+    <footer className="border-t border-line py-8 text-xs text-ink-muted">
+      <Container className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p>
-          &copy; {new Date().getFullYear()} {site.name}
+          <span className="text-primary">EOF</span> &copy; {new Date().getFullYear()} {site.name}
         </p>
-        <ul className="flex gap-5">
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
           {socials.map((social) => (
             <li key={social.id}>
               <a
                 href={social.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="transition-colors hover:text-cyan-glow"
+                className="inline-flex min-h-11 items-center uppercase tracking-[0.16em] transition-colors hover:text-primary sm:min-h-0"
               >
                 {social.label}
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href={site.resumePath}
+              download={site.resumeFileName}
+              className="inline-flex min-h-11 items-center uppercase tracking-[0.16em] transition-colors hover:text-primary sm:min-h-0"
+            >
+              Resume.pdf
+            </a>
+          </li>
         </ul>
       </Container>
     </footer>

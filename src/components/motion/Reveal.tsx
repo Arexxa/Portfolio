@@ -1,43 +1,26 @@
-import { useRef, type ElementType, type ReactNode } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
-import { useReducedMotion } from '@/hooks/useReducedMotion'
-import { DURATION, EASE } from '@/lib/constants'
-
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+import type { ReactNode } from 'react'
+import { m } from 'motion/react'
+import { fadeUp } from '@/lib/motion'
 
 interface RevealProps {
   children: ReactNode
-  as?: ElementType
   className?: string
-  delay?: number
-  y?: number
 }
 
-/** Fades and lifts content in when it scrolls into view. No-op under reduced motion. */
-export function Reveal({ children, as: Tag = 'div', className, delay = 0, y = 28 }: RevealProps) {
-  const ref = useRef<HTMLElement>(null)
-  const reduced = useReducedMotion()
-
-  useGSAP(
-    () => {
-      if (reduced || !ref.current) return
-      gsap.from(ref.current, {
-        opacity: 0,
-        y,
-        delay,
-        duration: DURATION.slow,
-        ease: EASE.outExpo,
-        scrollTrigger: { trigger: ref.current, start: 'top 88%', once: true },
-      })
-    },
-    { scope: ref, dependencies: [reduced, y, delay] },
-  )
-
+/**
+ * Fades and lifts content in once when it scrolls into view. Under reduced motion,
+ * MotionConfig skips the transform so content simply appears.
+ */
+export function Reveal({ children, className }: RevealProps) {
   return (
-    <Tag ref={ref} className={className}>
+    <m.div
+      className={className}
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+    >
       {children}
-    </Tag>
+    </m.div>
   )
 }

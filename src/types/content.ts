@@ -22,6 +22,12 @@ export interface SectionMeta {
   icon: IconName
 }
 
+export interface BootLine {
+  text: string
+  /** Right-aligned status tag, e.g. `OK`. */
+  status?: string
+}
+
 export interface SiteConfig {
   name: string
   shortName: string

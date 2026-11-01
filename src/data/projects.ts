@@ -1,30 +1,10 @@
-import projectOasis1 from '@/assets/img/projects/projectoasis-1.webp'
-import projectOasis2 from '@/assets/img/projects/projectoasis-2.webp'
-import projectOasis3 from '@/assets/img/projects/projectoasis-3.webp'
-import nverse1 from '@/assets/img/projects/nverse-1.webp'
-import nverse2 from '@/assets/img/projects/nverse-2.webp'
-import kings1 from '@/assets/img/projects/twelvekings-1.webp'
-import kings2 from '@/assets/img/projects/twelvekings-2.webp'
-import oasisLab1 from '@/assets/img/projects/oasislab-1.webp'
-import oasisLab2 from '@/assets/img/projects/oasislab-2.webp'
-import skin1 from '@/assets/img/projects/skingenerator-1.webp'
-import skin2 from '@/assets/img/projects/skingenerator-2.webp'
-import kejehub1 from '@/assets/img/projects/kejehub-1.webp'
-import kejehub2 from '@/assets/img/projects/kejehub-2.webp'
-import kejehub3 from '@/assets/img/projects/kejehub-3.webp'
-import kejehub4 from '@/assets/img/projects/kejehub-4.webp'
-import codebtech1 from '@/assets/img/projects/codebtech-1.webp'
-import codebtech2 from '@/assets/img/projects/codebtech-2.webp'
-import meme1 from '@/assets/img/projects/worldofmeme-1.webp'
-import meme2 from '@/assets/img/projects/worldofmeme-2.webp'
-import { COLORS } from '@/lib/constants'
-import type { Project, ProjectImage } from '@/types/content'
-
-const shot = (src: string, height: number, width = 960): ProjectImage => ({ src, width, height })
+import { projectImage } from '@/data/projectImages'
+import type { Project } from '@/types/content'
 
 /**
- * CUSTOMIZE: projects. The first MOON.maxOrbiting entries orbit the Projects planet,
- * every entry appears in the panel grid. Add screenshots to src/assets/img/projects.
+ * CUSTOMIZE: projects, in display order. Screenshots: add a master image to
+ * src/assets/img/projects, run `npm run optimize-images`, then reference it by file name.
+ * `accent` picks which palette role tints the window (follows the active theme).
  */
 export const projects: readonly Project[] = [
   {
@@ -39,8 +19,13 @@ export const projects: readonly Project[] = [
     ],
     tags: ['React', 'Vite', 'Material UI', 'SWR', 'JWT'],
     links: [{ label: 'Live site', href: 'https://kejehub.com/' }],
-    images: [shot(kejehub1, 499), shot(kejehub2, 492), shot(kejehub3, 562), shot(kejehub4, 729)],
-    color: COLORS.ember,
+    images: [
+      projectImage('kejehub-1'),
+      projectImage('kejehub-2'),
+      projectImage('kejehub-3'),
+      projectImage('kejehub-4'),
+    ],
+    accent: 'accent',
   },
   {
     id: 'codebtech',
@@ -56,8 +41,8 @@ export const projects: readonly Project[] = [
     ],
     tags: ['WordPress', 'Elementor', 'Crocoblock', 'NitroPack', 'Figma'],
     links: [{ label: 'Live site', href: 'https://www.codebtech.com/' }],
-    images: [shot(codebtech1, 480), shot(codebtech2, 483)],
-    color: COLORS.violet,
+    images: [projectImage('codebtech-1'), projectImage('codebtech-2')],
+    accent: 'secondary',
   },
   {
     id: 'world-of-meme',
@@ -71,8 +56,8 @@ export const projects: readonly Project[] = [
     ],
     tags: ['React', 'Express', 'MySQL', 'Vercel'],
     links: [],
-    images: [shot(meme1, 566, 559), shot(meme2, 409, 553)],
-    color: COLORS.cyan,
+    images: [projectImage('worldofmeme-1'), projectImage('worldofmeme-2')],
+    accent: 'primary',
   },
   {
     id: 'project-oasis',
@@ -85,8 +70,12 @@ export const projects: readonly Project[] = [
     ],
     tags: ['Phaser 3', 'TypeScript', 'Web3.js'],
     links: [{ label: 'Live site', href: 'https://game.projectoasis.io/' }],
-    images: [shot(projectOasis1, 464), shot(projectOasis2, 502), shot(projectOasis3, 455)],
-    color: COLORS.cyan,
+    images: [
+      projectImage('projectoasis-1'),
+      projectImage('projectoasis-2'),
+      projectImage('projectoasis-3'),
+    ],
+    accent: 'primary',
   },
   {
     id: 'nverse',
@@ -99,8 +88,8 @@ export const projects: readonly Project[] = [
     ],
     tags: ['React', 'Responsive'],
     links: [{ label: 'Live site', href: 'https://www.nverselabs.io/' }],
-    images: [shot(nverse1, 469), shot(nverse2, 505)],
-    color: COLORS.violet,
+    images: [projectImage('nverse-1'), projectImage('nverse-2')],
+    accent: 'secondary',
   },
   {
     id: 'twelve-kings',
@@ -113,8 +102,8 @@ export const projects: readonly Project[] = [
     ],
     tags: ['React', 'Web3.js', 'Wallet'],
     links: [{ label: 'Live site', href: 'https://the12kings.com/' }],
-    images: [shot(kings1, 467), shot(kings2, 499)],
-    color: COLORS.ember,
+    images: [projectImage('twelvekings-1'), projectImage('twelvekings-2')],
+    accent: 'accent',
   },
   {
     id: 'oasis-labs',
@@ -124,8 +113,8 @@ export const projects: readonly Project[] = [
     highlights: ['Built the interface with React as part of a development team.'],
     tags: ['React'],
     links: [{ label: 'Live site', href: 'https://oasislabs.tech/' }],
-    images: [shot(oasisLab1, 454), shot(oasisLab2, 419)],
-    color: COLORS.cyan,
+    images: [projectImage('oasislab-1'), projectImage('oasislab-2')],
+    accent: 'primary',
   },
   {
     id: 'skin-generator',
@@ -138,8 +127,8 @@ export const projects: readonly Project[] = [
     ],
     tags: ['React', 'Image processing'],
     links: [],
-    images: [shot(skin1, 413), shot(skin2, 581)],
-    color: COLORS.violet,
+    images: [projectImage('skingenerator-1'), projectImage('skingenerator-2')],
+    accent: 'secondary',
   },
   {
     id: 'aqua-detect',
@@ -154,7 +143,7 @@ export const projects: readonly Project[] = [
     tags: ['Python', 'TensorFlow', 'OpenCV', 'Flask'],
     links: [],
     images: [],
-    color: COLORS.violet,
+    accent: 'secondary',
   },
   {
     id: 'solvnex',
@@ -166,6 +155,6 @@ export const projects: readonly Project[] = [
     tags: ['Vue.js', 'Quasar', 'Tailwind CSS'],
     links: [],
     images: [],
-    color: COLORS.ember,
+    accent: 'accent',
   },
 ]

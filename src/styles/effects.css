@@ -80,7 +80,7 @@
     border: 1px solid var(--primary);
     opacity: 0;
   }
-  .flash-frame[data-flash='true']::before {
+  [data-flash='true'] .flash-frame::before {
     animation: flash 700ms ease-out 1;
   }
 

@@ -2,24 +2,19 @@ import type { HTMLAttributes } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
-const cardVariants = cva('rounded-glass p-5 sm:p-6', {
+const cardVariants = cva('p-4 sm:p-5', {
   variants: {
     tone: {
-      glass: 'glass',
-      solid: 'bg-navy-800 border border-white/10',
-      outline: 'border border-white/15',
-    },
-    interactive: {
-      true: 'transition-[transform,border-color] duration-300 ease-out-expo hover:-translate-y-1 hover:border-cyan-glow/60',
-      false: '',
+      surface: 'notch notch-sm border border-line bg-surface-2 [--notch-bg:var(--surface)]',
+      outline: 'border border-line',
     },
   },
-  defaultVariants: { tone: 'solid', interactive: false },
+  defaultVariants: { tone: 'surface' },
 })
 
 interface CardProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
-/** Surface primitive. */
-export function Card({ tone, interactive, className, ...props }: CardProps) {
-  return <div className={cn(cardVariants({ tone, interactive }), className)} {...props} />
+/** Inner surface used inside windows (facts, skill groups, contact channels). */
+export function Card({ tone, className, ...props }: CardProps) {
+  return <div className={cn(cardVariants({ tone }), className)} {...props} />
 }

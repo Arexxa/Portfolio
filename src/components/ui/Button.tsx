@@ -2,19 +2,19 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'reac
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
-const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium transition-[transform,box-shadow,background-color,border-color] duration-300 ease-out-expo disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97]',
+export const buttonVariants = cva(
+  'notch notch-sm inline-flex items-center justify-center gap-2 border font-mono uppercase tracking-[0.14em] transition-[color,background-color,border-color,box-shadow] duration-200 ease-out-expo disabled:pointer-events-none disabled:opacity-50 active:translate-y-px',
   {
     variants: {
       variant: {
-        primary: 'bg-cyan-glow text-void shadow-glow-cyan hover:bg-white hover:shadow-glow-violet',
-        outline: 'border border-white/25 text-ink hover:border-cyan-glow hover:text-cyan-glow',
-        ghost: 'text-ink-muted hover:bg-white/10 hover:text-ink',
+        primary: 'border-primary bg-primary text-bg hover:bg-ink hover:border-ink',
+        outline: 'border-line-strong text-ink hover:border-primary hover:text-primary',
+        ghost: 'border-transparent text-ink-muted hover:text-primary [&::after]:hidden',
       },
       size: {
-        sm: 'px-4 py-2 text-sm',
-        md: 'px-6 py-3 text-base',
-        lg: 'px-8 py-4 text-lg',
+        sm: 'min-h-9 px-3 text-[0.6875rem]',
+        md: 'min-h-11 px-5 text-xs',
+        lg: 'min-h-12 px-6 text-[0.8125rem]',
       },
     },
     defaultVariants: { variant: 'primary', size: 'md' },

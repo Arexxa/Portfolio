@@ -1,48 +1,43 @@
-import { useRef, type ElementType, type ReactNode } from 'react'
-import { gsap } from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { useReducedMotion } from '@/hooks/useReducedMotion'
-import { DURATION, EASE } from '@/lib/constants'
-
-gsap.registerPlugin(useGSAP)
+import type { ReactNode } from 'react'
+import { m } from 'motion/react'
+import { fadeUp, staggerParent } from '@/lib/motion'
 
 interface StaggerProps {
   children: ReactNode
-  as?: ElementType
   className?: string
-  /** Seconds between each direct child. */
+  /** Seconds between each child. */
   gap?: number
-  /** Re-run when this key changes (e.g. when a panel opens). */
-  runKey?: string
+  /** Render as a list (children must be <StaggerItem as="li">). */
+  as?: 'div' | 'ul' | 'ol'
 }
 
-/** Staggers the entrance of its direct children on mount. No-op under reduced motion. */
-export function Stagger({
-  children,
-  as: Tag = 'div',
-  className,
-  gap = 0.07,
-  runKey,
-}: StaggerProps) {
-  const ref = useRef<HTMLElement>(null)
-  const reduced = useReducedMotion()
-
-  useGSAP(
-    () => {
-      if (reduced || !ref.current) return
-      gsap.from(ref.current.children, {
-        opacity: 0,
-        y: 20,
-        duration: DURATION.base + 0.2,
-        stagger: gap,
-        ease: EASE.outExpo,
-      })
-    },
-    { scope: ref, dependencies: [reduced, gap, runKey] },
-  )
-
+/** Staggers the entrance of its <StaggerItem> children when scrolled into view. */
+export function Stagger({ children, className, gap = 0.06, as = 'div' }: StaggerProps) {
+  const Tag = m[as]
   return (
-    <Tag ref={ref} className={className}>
+    <Tag
+      className={className}
+      variants={staggerParent(gap)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+    >
+      {children}
+    </Tag>
+  )
+}
+
+interface StaggerItemProps {
+  children: ReactNode
+  className?: string
+  as?: 'div' | 'li'
+}
+
+/** Child of <Stagger>; inherits the parent's animation timing. */
+export function StaggerItem({ children, className, as = 'div' }: StaggerItemProps) {
+  const Tag = m[as]
+  return (
+    <Tag className={className} variants={fadeUp}>
       {children}
     </Tag>
   )
