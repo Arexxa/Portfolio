@@ -1,0 +1,236 @@
+/*
+ * Visual effects shared across components. Every animation here animates only transform,
+ * opacity or clip-path, and is disabled by the reduced-motion rule in globals.css plus the
+ * explicit guards below.
+ */
+
+@layer components {
+  /*
+   * Chamfered corner: covers the top-right corner with the page colour and draws a diagonal
+   * hairline. Uses a pseudo-element (not clip-path) so focus outlines are never clipped.
+   * Set --notch-bg when the element sits on a non --bg surface.
+   */
+  .notch {
+    position: relative;
+  }
+  .notch::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: var(--notch-size, var(--chamfer));
+    height: var(--notch-size, var(--chamfer));
+    pointer-events: none;
+    background: linear-gradient(
+      225deg,
+      var(--notch-bg, var(--bg)) calc(50% - 0.5px),
+      var(--notch-line, var(--line-strong)) calc(50% - 0.5px) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    );
+  }
+  .notch-sm {
+    --notch-size: var(--chamfer-sm);
+  }
+
+  /* Glitch: two aria-hidden copies of the text, revealed on hover/focus of .glitch-trigger. */
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+  .glitch-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  .glitch-layer:nth-of-type(1) {
+    color: var(--accent);
+  }
+  .glitch-layer:nth-of-type(2) {
+    color: var(--secondary);
+  }
+  .glitch-trigger:hover .glitch-layer:nth-of-type(1),
+  .glitch-trigger:focus-visible .glitch-layer:nth-of-type(1),
+  [data-flash='true'] .glitch-layer:nth-of-type(1) {
+    animation: glitch-a 420ms steps(2, end) 1;
+  }
+  .glitch-trigger:hover .glitch-layer:nth-of-type(2),
+  .glitch-trigger:focus-visible .glitch-layer:nth-of-type(2),
+  [data-flash='true'] .glitch-layer:nth-of-type(2) {
+    animation: glitch-b 420ms steps(2, end) 1;
+  }
+
+  /* Block caret used by the terminal prompt and boot log. */
+  .caret {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    vertical-align: text-bottom;
+    background: var(--primary);
+    animation: caret-blink 1s steps(1, end) infinite;
+  }
+
+  /* Section highlight when navigated to via icon, nav or terminal. */
+  .flash-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid var(--primary);
+    opacity: 0;
+  }
+  .flash-frame[data-flash='true']::before {
+    animation: flash 700ms ease-out 1;
+  }
+
+  /* CRT overlay: static scanlines + vignette, plus one slow composited scan beam. */
+  .crt {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-crt);
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 2px,
+        rgb(0 0 0 / 0.22) 2px,
+        rgb(0 0 0 / 0.22) 3px
+      ),
+      radial-gradient(ellipse at center, transparent 62%, rgb(0 0 0 / 0.45) 100%);
+    opacity: 0.6;
+  }
+  .crt::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 18vh;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      color-mix(in srgb, var(--primary) 5%, transparent),
+      transparent
+    );
+    transform: translateY(-20vh);
+    animation: crt-beam 9s linear infinite;
+    will-change: transform;
+  }
+
+  /* Low-tier / no-WebGL hero backdrop: CSS perspective grid. */
+  .grid-fallback {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    perspective: 320px;
+    perspective-origin: 50% 38%;
+  }
+  .grid-fallback__plane {
+    position: absolute;
+    left: -50%;
+    right: -50%;
+    top: 40%;
+    height: 200%;
+    transform-origin: 50% 0;
+    transform: rotateX(72deg);
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 55%, transparent 90%);
+  }
+  /* The lines live on an inner layer so only its transform animates (one cell per loop). */
+  .grid-fallback__scroll {
+    position: absolute;
+    inset: -48px 0 0;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--primary) 45%, transparent) 1px, transparent 1px),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--primary) 45%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 48px 48px;
+    animation: grid-scroll 1.6s linear infinite;
+  }
+  .grid-fallback__horizon {
+    position: absolute;
+    inset: 0 0 auto;
+    top: calc(40% - 1px);
+    height: 1px;
+    background: color-mix(in srgb, var(--secondary) 70%, transparent);
+    box-shadow: 0 0 24px 2px color-mix(in srgb, var(--secondary) 35%, transparent);
+  }
+}
+
+@keyframes glitch-a {
+  0% {
+    opacity: 0.9;
+    clip-path: inset(10% 0 62% 0);
+    transform: translate(-3px, 0);
+  }
+  50% {
+    opacity: 0.9;
+    clip-path: inset(58% 0 12% 0);
+    transform: translate(3px, 0);
+  }
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glitch-b {
+  0% {
+    opacity: 0.9;
+    clip-path: inset(66% 0 6% 0);
+    transform: translate(3px, 0);
+  }
+  50% {
+    opacity: 0.9;
+    clip-path: inset(18% 0 48% 0);
+    transform: translate(-2px, 0);
+  }
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes crt-beam {
+  to {
+    transform: translateY(120vh);
+  }
+}
+
+@keyframes grid-scroll {
+  to {
+    transform: translateY(48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt::after,
+  .grid-fallback__scroll,
+  .caret {
+    animation: none;
+  }
+  .glitch-layer {
+    display: none;
+  }
+}

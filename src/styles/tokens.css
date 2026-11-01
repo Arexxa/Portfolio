@@ -1,33 +1,73 @@
 /*
- * DESIGN TOKENS — single source of truth for the theme.
- * CUSTOMIZE: change the values here and Tailwind utilities, glass panels and
- * (via lib/constants.ts COLORS) the 3D scene should be kept in sync.
+ * DESIGN TOKENS: single source of truth for the theme.
+ * CUSTOMIZE: change values here; Tailwind utilities (globals.css @theme) and the 3D scene
+ * (three/hooks/useThemeColors reads --primary/--secondary/--accent/--bg) follow automatically.
  */
 :root {
-  --void: #04060d;
-  --navy-900: #070b18;
-  --navy-800: #0b1226;
-  --navy-700: #111a35;
-  --ink: #e8ecf8;
-  --ink-muted: #9aa6c4;
-  --cyan: #22d3ee;
-  --violet: #8b5cf6;
-  --ember: #ff8a3d;
-  --glass-bg: rgb(11 18 38 / 0.62);
-  --glass-border: rgb(148 163 255 / 0.18);
+  /* Neutrals */
+  --bg: #050507;
+  --surface: #0b0c10;
+  --surface-2: #12141a;
+  --line: rgb(255 255 255 / 0.1);
+  --line-strong: rgb(255 255 255 / 0.22);
+  --ink: #e4ebe7;
+  --ink-muted: #8c9a94;
 
-  --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
+  /* Neon source colours (all >= 6:1 contrast on --bg) */
+  --neon-green: #39ff88;
+  --neon-magenta: #ff2bd6;
+  --neon-blue: #2de2ff;
 
-  --radius-sm: 0.5rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.5rem;
+  /* Semantic */
+  --warning: #ffd23f;
+  --danger: #ff4d6d;
 
-  --shadow-glow-cyan: 0 0 32px -4px rgb(34 211 238 / 0.45);
-  --shadow-glow-violet: 0 0 32px -4px rgb(139 92 246 / 0.45);
-  --shadow-glass: 0 24px 80px -24px rgb(0 0 0 / 0.8);
+  /* Roles: remapped per theme below. Default = matrix. */
+  --primary: var(--neon-green);
+  --secondary: var(--neon-blue);
+  --accent: var(--neon-magenta);
+  --success: var(--neon-green);
+  --info: var(--secondary);
 
+  /* Typography */
+  --family-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --family-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  /* Shape: square corners with a chamfered notch instead of rounded radii */
+  --radius: 0px;
+  --chamfer: 10px;
+  --chamfer-sm: 6px;
+
+  /* Glow, used only for focus / active / primary states */
+  --glow-primary:
+    0 0 0 1px var(--primary), 0 0 18px -2px color-mix(in srgb, var(--primary) 55%, transparent);
+  --shadow-window: 0 20px 60px -30px rgb(0 0 0 / 0.9);
+
+  /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast: 160ms;
-  --duration-base: 320ms;
+  --duration-fast: 140ms;
+  --duration-base: 280ms;
+
+  /* Layering */
+  --z-backdrop: 0;
+  --z-content: 10;
+  --z-window-max: 30;
+  --z-bar: 40;
+  --z-dock: 45;
+  --z-modal: 50;
+  --z-crt: 70;
+  --z-boot: 80;
+  --z-skip: 90;
+}
+
+[data-theme='synthwave'] {
+  --primary: var(--neon-magenta);
+  --secondary: var(--neon-blue);
+  --accent: var(--neon-green);
+}
+
+[data-theme='ice'] {
+  --primary: var(--neon-blue);
+  --secondary: var(--neon-magenta);
+  --accent: var(--neon-green);
 }

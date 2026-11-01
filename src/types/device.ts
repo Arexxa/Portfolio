@@ -1,18 +1,17 @@
 export type DeviceTierName = 'high' | 'medium' | 'low'
 
 export interface QualityPreset {
-  /** Number of star particles in the starfield. */
-  stars: number
-  /** Sphere segments for planets. */
-  planetSegments: number
+  /** Whether to mount the WebGL canvas at all (false = CSS grid fallback). */
+  webgl: boolean
   /** Max devicePixelRatio. */
   maxDpr: number
   antialias: boolean
+  /** Floating data particles. */
+  particles: number
+  /** Horizon terrain grid resolution (segments per side). */
+  terrainSegments: number
+  /** Bloom post-processing. */
   bloom: boolean
-  nebula: boolean
-  nameParticles: number
-  /** Whether to mount the WebGL canvas at all. */
-  webgl: boolean
 }
 
 export interface DeviceTier {
