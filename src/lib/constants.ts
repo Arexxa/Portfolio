@@ -73,14 +73,15 @@ export const TERMINAL = {
 
 /** CUSTOMIZE: project window layout on the draggable desktop (pixels). */
 export const WINDOW = {
-  width: 340,
-  /** Approximate height used for layout; real height is content-driven. */
+  width: 300,
+  /** Approximate height used for layout; real height is content-driven (~420-470). */
   height: 470,
   columns: 3,
-  gapX: 28,
-  /** Vertical overlap step between rows and columns for the cascade look. */
-  offsetY: 40,
-  rowStep: 300,
+  gapX: 24,
+  /** Each column starts a little lower than the previous, for a staggered desktop look. */
+  offsetY: 32,
+  /** Rows never overlap, so no window hides another's content until the user drags it. */
+  rowStep: 494,
   padding: 24,
   nudge: 16,
   nudgeLarge: 64,
@@ -92,7 +93,8 @@ export const CAMERA = {
   near: 0.1,
   far: 120,
   position: [0, 1.6, 6] as const,
-  lookAt: [0, 1.1, -10] as const,
+  /** Looking slightly up pushes the horizon below the hero copy. */
+  lookAt: [0, 3.3, -10] as const,
   /** How far the camera drifts toward the pointer (world units). */
   parallax: 0.45,
   damping: 2.5,
@@ -113,7 +115,7 @@ export const TERRAIN = {
   z: -48,
   /** Half-width of the flat valley kept open in the centre. */
   valley: 9,
-  height: 7,
+  height: 5.5,
   noiseScale: 0.09,
 } as const
 
@@ -127,7 +129,7 @@ export const PARTICLES = {
   speed: 0.35,
 } as const
 
-export const BLOOM = { intensity: 0.85, threshold: 0.15, smoothing: 0.25 } as const
+export const BLOOM = { intensity: 0.6, threshold: 0.15, smoothing: 0.25 } as const
 
 /** CUSTOMIZE: quality presets per device tier. */
 export const QUALITY_PRESETS: Record<DeviceTierName, QualityPreset> = {

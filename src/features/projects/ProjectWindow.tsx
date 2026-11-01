@@ -46,7 +46,7 @@ export const ProjectWindow = memo(function ProjectWindow({
         <ResponsiveImage
           image={cover}
           alt={`${project.title} screenshot`}
-          sizes="(min-width: 1024px) 340px, (min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
           className="aspect-[2/1] border-b border-line"
         />
       ) : (

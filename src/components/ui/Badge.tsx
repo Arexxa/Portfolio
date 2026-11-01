@@ -25,9 +25,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeo
 export function Badge({ tone, className, children, ...props }: BadgeProps) {
   return (
     <span className={cn(badgeVariants({ tone }), className)} {...props}>
-      <span aria-hidden="true" className="opacity-60">
-        #
-      </span>
+      <span aria-hidden="true">#</span>
       {children}
     </span>
   )

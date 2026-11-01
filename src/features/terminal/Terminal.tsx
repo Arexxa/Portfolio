@@ -90,7 +90,7 @@ export function Terminal({ variant, className, actions }: TerminalProps) {
           spellCheck={false}
           enterKeyHint="send"
           aria-describedby={`${inputId}-hint`}
-          className="min-w-0 flex-1 bg-transparent text-ink caret-primary outline-none placeholder:text-ink-muted/60"
+          className="min-w-0 flex-1 bg-transparent text-ink caret-primary outline-none placeholder:text-ink-muted"
           placeholder="type help"
         />
         <span id={`${inputId}-hint`} className="sr-only">

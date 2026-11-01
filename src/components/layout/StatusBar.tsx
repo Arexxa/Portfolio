@@ -68,7 +68,7 @@ export function StatusBar({ active, onNavigate, terminalOpen, onToggleTerminal }
                   active === section.id ? 'text-primary' : 'text-ink-muted hover:text-ink',
                 )}
               >
-                <span aria-hidden="true" className="text-[0.625rem] opacity-60">
+                <span aria-hidden="true" className="text-[0.625rem]">
                   {section.number}
                 </span>
                 {section.title}

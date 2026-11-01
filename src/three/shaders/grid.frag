@@ -16,7 +16,7 @@ void main() {
   vec2 dist = abs(fract(coord - 0.5) - 0.5) / fwidth(coord);
   float line = 1.0 - min(min(dist.x, dist.y) / uLineWidth, 1.0);
   float fog = smoothstep(uFogNear, uFogFar, vDepth);
-  vec3 color = mix(uColor * line, uFogColor, fog);
+  vec3 color = mix(uColor * line * 0.75, uFogColor, fog);
   gl_FragColor = vec4(color, 1.0);
   #include <colorspace_fragment>
 }

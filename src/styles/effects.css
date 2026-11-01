@@ -123,13 +123,13 @@
     inset: 0;
     overflow: hidden;
     perspective: 320px;
-    perspective-origin: 50% 38%;
+    perspective-origin: 50% 50%;
   }
   .grid-fallback__plane {
     position: absolute;
     left: -50%;
     right: -50%;
-    top: 40%;
+    top: 54%;
     height: 200%;
     transform-origin: 50% 0;
     transform: rotateX(72deg);
@@ -153,7 +153,7 @@
   .grid-fallback__horizon {
     position: absolute;
     inset: 0 0 auto;
-    top: calc(40% - 1px);
+    top: calc(54% - 1px);
     height: 1px;
     background: color-mix(in srgb, var(--secondary) 70%, transparent);
     box-shadow: 0 0 24px 2px color-mix(in srgb, var(--secondary) 35%, transparent);

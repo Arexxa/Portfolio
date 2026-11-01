@@ -36,7 +36,7 @@ export const sections: readonly SectionMeta[] = [
     file: 'projects/',
     status: 'RUNNING',
     blurb:
-      'Each project runs in its own window. Drag them around, filter by stack, open for details.',
+      'Each project runs in its own window. Filter by stack, open one for details. On a large screen, drag them around.',
     icon: 'grid',
   },
   {

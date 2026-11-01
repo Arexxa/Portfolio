@@ -40,7 +40,7 @@ export function Hero({ booted, onNavigate }: HeroProps) {
       className="relative isolate flex min-h-[calc(100svh-3rem)] items-center overflow-hidden"
     >
       <HeroBackdrop enabled={booted} />
-      <Container className="grid gap-10 py-12 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14">
+      <Container className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-14">
         <div className="flex flex-col gap-7">
           <p className="text-xs uppercase tracking-[0.24em] text-primary">
             {site.osName} <span className="text-ink-muted">// session active</span>

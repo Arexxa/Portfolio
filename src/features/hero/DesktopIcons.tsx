@@ -8,7 +8,7 @@ interface DesktopIconsProps {
 }
 
 const iconClasses =
-  'group flex min-h-20 w-full flex-col items-center justify-center gap-1.5 border border-transparent px-2 py-3 text-center transition-colors hover:border-line-strong hover:bg-surface/80 focus-visible:border-primary'
+  'group flex min-h-20 w-full flex-col items-center justify-center gap-1.5 border border-transparent bg-bg/70 px-2 py-3 text-center transition-colors hover:border-line-strong hover:bg-surface focus-visible:border-primary'
 
 /** Desktop shortcuts: one real button per section plus the resume download. */
 export function DesktopIcons({ onOpen }: DesktopIconsProps) {

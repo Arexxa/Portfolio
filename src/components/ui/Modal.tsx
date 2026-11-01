@@ -71,7 +71,7 @@ function ModalDialog({
             <Icon name="close" />
           </button>
         </div>
-        <div className="overflow-y-auto overscroll-contain p-5 sm:p-8">{children}</div>
+        <div className="min-h-0 overflow-y-auto overscroll-contain p-5 sm:p-8">{children}</div>
       </m.div>
     </div>
   )
