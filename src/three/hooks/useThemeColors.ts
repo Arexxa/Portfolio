@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Color } from 'three'
 import { useSettings } from '@/hooks/useSettings'
+import type { ThemeId } from '@/types/settings'
 
 export interface ThemeColors {
   primary: Color
@@ -22,14 +23,16 @@ function readVar(styles: CSSStyleDeclaration, name: keyof typeof FALLBACK): Colo
  */
 export function useThemeColors(): ThemeColors {
   const { theme } = useSettings()
-  // `theme` is the cache key: the values come from the CSS variables it switches.
-  return useMemo(() => {
-    const styles = getComputedStyle(document.documentElement)
-    return {
-      primary: readVar(styles, 'primary'),
-      secondary: readVar(styles, 'secondary'),
-      accent: readVar(styles, 'accent'),
-      bg: readVar(styles, 'bg'),
-    }
-  }, [theme])
+  return useMemo(() => readPalette(theme), [theme])
+}
+
+/** `_theme` is only the cache key: the values come from the CSS variables it switches. */
+function readPalette(_theme: ThemeId): ThemeColors {
+  const styles = getComputedStyle(document.documentElement)
+  return {
+    primary: readVar(styles, 'primary'),
+    secondary: readVar(styles, 'secondary'),
+    accent: readVar(styles, 'accent'),
+    bg: readVar(styles, 'bg'),
+  }
 }

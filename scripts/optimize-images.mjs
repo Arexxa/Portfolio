@@ -24,8 +24,14 @@ for (const file of (await readdir(dir)).sort()) {
 
   for (const width of WIDTHS) {
     const base = sharp(input).resize({ width, withoutEnlargement: true })
-    const info = await base.clone().webp({ quality: 76 }).toFile(path.join(dir, `${name}-${width}.webp`))
-    await base.clone().avif({ quality: 52, effort: 6 }).toFile(path.join(dir, `${name}-${width}.avif`))
+    const info = await base
+      .clone()
+      .webp({ quality: 76 })
+      .toFile(path.join(dir, `${name}-${width}.webp`))
+    await base
+      .clone()
+      .avif({ quality: 52, effort: 6 })
+      .toFile(path.join(dir, `${name}-${width}.avif`))
     size = { width: info.width, height: info.height }
   }
 

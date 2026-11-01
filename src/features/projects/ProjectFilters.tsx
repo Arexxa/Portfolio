@@ -6,9 +6,14 @@ interface ProjectFiltersProps {
   onSelect: (tag: string | null) => void
 }
 
-/** Tag filter chips. `aria-pressed` conveys the current filter. */
+/** Tech filter chips. `aria-pressed` conveys the active filter. */
 export function ProjectFilters({ tags, selected, onSelect }: ProjectFiltersProps) {
-  const options: (string | null)[] = [null, ...tags]
+  // A tag chosen from the terminal may not be one of the top chips; show it anyway.
+  const options: (string | null)[] = [
+    null,
+    ...tags,
+    ...(selected && !tags.includes(selected) ? [selected] : []),
+  ]
   return (
     <ul className="flex flex-wrap gap-2" aria-label="Filter projects by technology">
       {options.map((tag) => (
@@ -18,13 +23,13 @@ export function ProjectFilters({ tags, selected, onSelect }: ProjectFiltersProps
             aria-pressed={selected === tag}
             onClick={() => onSelect(tag)}
             className={cn(
-              'rounded-full border px-4 py-1.5 font-mono text-xs transition-colors',
+              'min-h-9 border px-3 text-xs transition-colors',
               selected === tag
-                ? 'border-cyan-glow bg-cyan-glow/15 text-cyan-glow'
-                : 'border-white/15 text-ink-muted hover:text-ink',
+                ? 'border-primary bg-primary text-bg'
+                : 'border-line-strong text-ink-muted hover:border-primary hover:text-primary',
             )}
           >
-            {tag ?? 'All'}
+            {tag ? `#${tag}` : 'all'}
           </button>
         </li>
       ))}

@@ -15,9 +15,24 @@ export function getFilterTags(projects: readonly Project[]): string[] {
     .map(([tag]) => tag)
 }
 
+/** Every distinct tag, in first-seen order. */
+export function getAllTags(projects: readonly Project[]): string[] {
+  return [...new Set(projects.flatMap((project) => project.tags))]
+}
+
+/** Case-insensitive lookup of a tag's canonical spelling. */
+export function resolveTag(projects: readonly Project[], input: string): string | null {
+  const needle = input.toLowerCase()
+  return getAllTags(projects).find((tag) => tag.toLowerCase() === needle) ?? null
+}
+
 export function filterProjects(
   projects: readonly Project[],
   tag: string | null,
 ): readonly Project[] {
   return tag ? projects.filter((project) => project.tags.includes(tag)) : projects
+}
+
+export function findProject(projects: readonly Project[], id: string): Project | undefined {
+  return projects.find((project) => project.id === id.toLowerCase())
 }

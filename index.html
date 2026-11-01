@@ -1,36 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="matrix" data-crt="true">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#04060d" />
+    <meta name="theme-color" content="#050507" />
     <meta name="color-scheme" content="dark" />
+
+    <!-- Apply the saved theme / CRT preference before first paint (see SettingsProvider). -->
+    <script>
+      try {
+        var d = document.documentElement
+        var t = JSON.parse(localStorage.getItem('shahrul-os:theme'))
+        var c = JSON.parse(localStorage.getItem('shahrul-os:crt'))
+        if (t === 'matrix' || t === 'synthwave' || t === 'ice') d.dataset.theme = t
+        if (typeof c === 'boolean') d.dataset.crt = String(c)
+      } catch (e) {}
+    </script>
+
+    <!-- Only the body font is preloaded: it renders the LCP text. -->
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- CUSTOMIZE: keep title/description/URLs in sync with src/data/site.ts -->
     <title>Shahrulnizam bin Ibrahim | Senior Software Developer</title>
     <meta
       name="description"
-      content="Portfolio of Shahrulnizam bin Ibrahim, a Senior Software Developer specialising in React, Next.js, Node.js and data engineering. Fly through an interactive 3D galaxy of experience, skills and projects."
+      content="Portfolio of Shahrulnizam bin Ibrahim, a Senior Software Developer specialising in React, Next.js, Node.js and data engineering. Boot the terminal to explore experience, skills and projects."
     />
     <meta name="author" content="Shahrulnizam bin Ibrahim" />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://shahrulnizam-portfolio.vercel.app/" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Shahrulnizam bin Ibrahim" />
     <meta property="og:title" content="Shahrulnizam bin Ibrahim | Senior Software Developer" />
     <meta
       property="og:description"
-      content="Fly through an interactive 3D galaxy of experience, skills and projects."
+      content="SHAHRUL.OS: a terminal-driven portfolio of a full-stack engineer. Experience, skills, projects and contact."
     />
     <meta property="og:url" content="https://shahrulnizam-portfolio.vercel.app/" />
     <meta property="og:image" content="https://shahrulnizam-portfolio.vercel.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="SHAHRUL.OS terminal showing Shahrulnizam bin Ibrahim, Senior Software Developer"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Shahrulnizam bin Ibrahim | Senior Software Developer" />
     <meta
       name="twitter:description"
-      content="Fly through an interactive 3D galaxy of experience, skills and projects."
+      content="SHAHRUL.OS: a terminal-driven portfolio of a full-stack engineer."
     />
     <meta name="twitter:image" content="https://shahrulnizam-portfolio.vercel.app/og-image.png" />
 
@@ -45,6 +71,7 @@
         "@type": "Person",
         "name": "Shahrulnizam bin Ibrahim",
         "jobTitle": "Senior Software Developer",
+        "description": "Full-stack engineer shipping fast, resilient web products and the data pipelines behind them.",
         "url": "https://shahrulnizam-portfolio.vercel.app/",
         "email": "mailto:shahrulofficial12@gmail.com",
         "image": "https://shahrulnizam-portfolio.vercel.app/og-image.png",
@@ -59,85 +86,103 @@
           "name": "Universiti Teknologi MARA (UiTM)"
         },
         "worksFor": { "@type": "Organization", "name": "PETRONAS" },
-        "knowsAbout": ["React", "Next.js", "Node.js", "TypeScript", "Vue.js", "ETL", "Web3"],
+        "knowsAbout": [
+          "React",
+          "Next.js",
+          "Node.js",
+          "TypeScript",
+          "Vue.js",
+          "MSSQL",
+          "ETL",
+          "Web3"
+        ],
         "sameAs": ["https://github.com/Arexxa", "https://www.linkedin.com/in/shahrulnizam-ibrahim/"]
       }
     </script>
   </head>
   <body>
-    <!-- Static first paint (replaced by React). Mirrors src/features/hero/Hero.tsx to avoid layout shift. -->
+    <!-- Static first paint (replaced by React). Mirrors the hero identity block in src/features/hero/Hero.tsx. -->
     <div id="root">
-      <div class="relative z-10">
-        <div class="flex min-h-svh flex-col justify-end pb-24 sm:pb-20">
-          <div
-            class="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-5 text-center sm:px-8"
-          >
-            <div class="h-8 sm:h-10">
-              <h1 class="text-gradient text-2xl font-bold leading-none tracking-tight sm:text-4xl">
-                Shahrulnizam bin Ibrahim
-              </h1>
-            </div>
-            <p class="font-mono text-sm uppercase tracking-[0.35em] text-cyan-glow sm:text-base">
-              Senior Software Developer
-            </p>
-            <p class="max-w-xl text-lg text-ink-muted">
-              Full-stack engineer building fast, resilient web products and data pipelines.
-            </p>
-            <div class="flex flex-wrap justify-center gap-3">
-              <span
-                class="inline-flex items-center justify-center rounded-full bg-cyan-glow px-8 py-4 text-lg font-medium text-void"
-                >Begin the flight</span
-              >
-              <span
-                class="inline-flex items-center justify-center rounded-full border border-white/25 px-8 py-4 text-lg font-medium text-ink"
-                >Download resume</span
-              >
-            </div>
-            <p class="pt-2 text-xs text-ink-muted">Scroll to travel</p>
-          </div>
-        </div>
+      <div style="height: 3rem; border-bottom: 1px solid rgb(255 255 255 / 0.1)"></div>
+      <div
+        style="
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 3rem 1.25rem;
+          min-height: calc(100svh - 3rem);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 1.5rem;
+          font-family: 'JetBrains Mono', ui-monospace, monospace;
+          color: #8c9a94;
+        "
+      >
+        <p style="margin: 0; font-size: 0.75rem; letter-spacing: 0.24em; color: #39ff88">
+          SHAHRUL.OS // booting
+        </p>
+        <h1
+          style="
+            margin: 0;
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            font-size: clamp(2.5rem, 6.5vw, 4.75rem);
+            line-height: 1.1;
+            color: #e4ebe7;
+          "
+        >
+          Shahrulnizam <span style="display: block; font-size: 0.5em">bin Ibrahim</span>
+        </h1>
+        <p style="margin: 0; font-size: 0.875rem; letter-spacing: 0.2em; color: #2de2ff">
+          SENIOR SOFTWARE DEVELOPER
+        </p>
       </div>
     </div>
     <noscript>
       <main
         style="
-          max-width: 42rem;
+          max-width: 44rem;
           margin: 0 auto;
           padding: 4rem 1.25rem;
-          font-family: system-ui, sans-serif;
-          line-height: 1.6;
-          color: #e8ecf8;
+          font-family: ui-monospace, monospace;
+          line-height: 1.7;
+          color: #e4ebe7;
+          background: #050507;
         "
       >
+        <p style="color: #39ff88">SHAHRUL.OS // JavaScript disabled, plain-text mode</p>
         <h1>Shahrulnizam bin Ibrahim</h1>
         <p><strong>Senior Software Developer</strong> based in Segamat, Johor, Malaysia.</p>
         <p>
           Full-stack engineer working with React, Next.js, Vue, Node.js, MSSQL and ETL pipelines.
-          This portfolio is an interactive 3D experience that needs JavaScript; here is the short
-          version.
+          The interactive terminal needs JavaScript; here is the short version.
         </p>
-        <h2>Highlights</h2>
+        <h2>Experience</h2>
         <ul>
-          <li>Senior Software Developer, PETRONAS (2025 - 2026)</li>
-          <li>
-            Projects: Project Oasis, Nverse Labs, 12 Kings, Oasis Labs, KejeHub, World of Meme
-          </li>
-          <li>AWS Certified Solutions Architect - Associate</li>
+          <li>Senior Software Developer, PETRONAS (Jul 2025 - Oct 2026)</li>
+          <li>Software Developer, ShopOpx Sdn Bhd (Nov 2024 - Jul 2025)</li>
+          <li>Software Developer, Consurv Technic (May 2024 - Sep 2024)</li>
+          <li>Software Developer, Syntronic Malaysia for TM R&amp;D (Apr 2023 - Apr 2024)</li>
+          <li>Analyst Programmer, GoShare Sdn Bhd (Aug 2022 - Mar 2023)</li>
         </ul>
+        <h2>Projects</h2>
+        <p>
+          KejeHub, Codebase Technology, World of Meme, Project Oasis, Nverse Labs, 12 Kings, Oasis
+          Labs, Skin Generator, Aqua Detect IoT, Solvnex System.
+        </p>
         <h2>Contact</h2>
         <ul>
           <li>
-            <a href="mailto:shahrulofficial12@gmail.com" style="color: #22d3ee"
+            <a href="mailto:shahrulofficial12@gmail.com" style="color: #39ff88"
               >shahrulofficial12@gmail.com</a
             >
           </li>
-          <li><a href="https://github.com/Arexxa" style="color: #22d3ee">GitHub</a></li>
+          <li><a href="https://github.com/Arexxa" style="color: #39ff88">GitHub</a></li>
           <li>
-            <a href="https://www.linkedin.com/in/shahrulnizam-ibrahim/" style="color: #22d3ee"
+            <a href="https://www.linkedin.com/in/shahrulnizam-ibrahim/" style="color: #39ff88"
               >LinkedIn</a
             >
           </li>
-          <li><a href="/resume.pdf" style="color: #22d3ee">Download resume (PDF)</a></li>
+          <li><a href="/resume.pdf" style="color: #39ff88">Download resume (PDF)</a></li>
         </ul>
       </main>
     </noscript>

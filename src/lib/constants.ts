@@ -48,8 +48,13 @@ export const EASE = {
 
 /** CUSTOMIZE: boot sequence timing. */
 export const BOOT = {
-  charMs: 11,
-  linePauseMs: 110,
+  /** Typing speed and the pause after each line. */
+  charMs: 8,
+  linePauseMs: 80,
+  /** How often the typed text is updated (several characters per tick). */
+  tickMs: 32,
+  /** Hold on the finished log before the glitch-out. */
+  holdMs: 220,
   /** Hard cap: the boot never runs longer than this, whatever the line count. */
   maxMs: 2400,
   glitchMs: 380,
@@ -70,12 +75,12 @@ export const TERMINAL = {
 export const WINDOW = {
   width: 340,
   /** Approximate height used for layout; real height is content-driven. */
-  height: 330,
+  height: 470,
   columns: 3,
   gapX: 28,
   /** Vertical overlap step between rows and columns for the cascade look. */
   offsetY: 40,
-  rowStep: 250,
+  rowStep: 300,
   padding: 24,
   nudge: 16,
   nudgeLarge: 64,

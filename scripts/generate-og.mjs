@@ -1,22 +1,40 @@
-// Generates public/og-image.png (1200x630). Edit the text/colors below and run: node scripts/generate-og.mjs
+// Generates public/og-image.png (1200x630). Edit the text/colours below and run: node scripts/generate-og.mjs
 import sharp from 'sharp'
+
+const BG = '#050507'
+const GREEN = '#39ff88'
+const BLUE = '#2de2ff'
+const MAGENTA = '#ff2bd6'
+const INK = '#e4ebe7'
+const MUTED = '#8c9a94'
+const MONO = "'JetBrains Mono', Consolas, 'Courier New', monospace"
+const SANS = "'Space Grotesk', Arial, Helvetica, sans-serif"
+
+// Perspective grid floor: horizontal lines bunch toward the horizon, verticals fan out.
+const horizon = 430
+const floor = Array.from({ length: 9 }, (_, i) => {
+  const y = horizon + Math.pow(i / 8, 2) * 200
+  return `<line x1="0" y1="${y}" x2="1200" y2="${y}"/>`
+}).join('')
+const rays = Array.from({ length: 25 }, (_, i) => {
+  const x = -1200 + i * 150
+  return `<line x1="600" y1="${horizon}" x2="${x}" y2="630"/>`
+}).join('')
 
 const svg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
-  <defs>
-    <radialGradient id="v" cx="25%" cy="20%" r="70%"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".45"/><stop offset="1" stop-color="#04060d" stop-opacity="0"/></radialGradient>
-    <radialGradient id="c" cx="85%" cy="80%" r="60%"><stop offset="0" stop-color="#22d3ee" stop-opacity=".35"/><stop offset="1" stop-color="#04060d" stop-opacity="0"/></radialGradient>
-    <radialGradient id="p" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ff8a3d"/><stop offset=".6" stop-color="#7a2a0a"/><stop offset="1" stop-color="#000"/></radialGradient>
-    <linearGradient id="t" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset=".6" stop-color="#8b5cf6"/><stop offset="1" stop-color="#ff8a3d"/></linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="#04060d"/>
-  <rect width="1200" height="630" fill="url(#v)"/>
-  <rect width="1200" height="630" fill="url(#c)"/>
-  <circle cx="930" cy="300" r="170" fill="url(#p)"/>
-  <circle cx="930" cy="300" r="182" fill="none" stroke="#ff8a3d" stroke-opacity=".35" stroke-width="6"/>
-  <text x="80" y="300" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="74" fill="url(#t)">SHAHRULNIZAM</text>
-  <text x="80" y="370" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#e8ecf8">Senior Software Developer</text>
-  <text x="80" y="425" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#9aa6c4">Fly through an interactive 3D galaxy portfolio</text>
+  <rect width="1200" height="630" fill="${BG}"/>
+  <g stroke="${GREEN}" stroke-opacity=".35" stroke-width="1.5">${floor}${rays}</g>
+  <line x1="0" y1="${horizon}" x2="1200" y2="${horizon}" stroke="${BLUE}" stroke-width="2"/>
+  <rect x="60" y="60" width="1080" height="320" fill="${BG}" stroke="rgb(255,255,255)" stroke-opacity=".22"/>
+  <rect x="60" y="60" width="1080" height="40" fill="#12141a"/>
+  <text x="80" y="87" font-family="${MONO}" font-size="18" fill="${MUTED}" letter-spacing="3">01  ~/whoami</text>
+  <text x="1040" y="87" font-family="${MONO}" font-size="18" fill="${MUTED}" letter-spacing="3">[TTY1]</text>
+  <text x="96" y="160" font-family="${MONO}" font-size="22" fill="${GREEN}" letter-spacing="5">SHAHRUL.OS // session active</text>
+  <text x="96" y="250" font-family="${SANS}" font-weight="700" font-size="80" fill="${MAGENTA}" fill-opacity=".7" transform="translate(-4 0)">Shahrulnizam</text>
+  <text x="96" y="250" font-family="${SANS}" font-weight="700" font-size="80" fill="${INK}">Shahrulnizam</text>
+  <text x="96" y="310" font-family="${MONO}" font-size="26" fill="${BLUE}" letter-spacing="4">SENIOR SOFTWARE DEVELOPER</text>
+  <text x="96" y="352" font-family="${MONO}" font-size="20" fill="${MUTED}">guest@shahrul.os:~$ help</text>
 </svg>`
 
 await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile('public/og-image.png')

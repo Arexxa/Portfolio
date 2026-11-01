@@ -44,8 +44,9 @@ function FieldShell({
 export const Input = forwardRef<
   HTMLInputElement,
   FieldProps & InputHTMLAttributes<HTMLInputElement>
->(function Input({ label, error, className, ...props }, ref) {
-  const id = useId()
+>(function Input({ label, error, className, id: idProp, ...props }, ref) {
+  const generatedId = useId()
+  const id = idProp ?? generatedId
   return (
     <FieldShell id={id} label={label} error={error}>
       <input
@@ -64,8 +65,9 @@ export const Input = forwardRef<
 export const Textarea = forwardRef<
   HTMLTextAreaElement,
   FieldProps & TextareaHTMLAttributes<HTMLTextAreaElement>
->(function Textarea({ label, error, className, ...props }, ref) {
-  const id = useId()
+>(function Textarea({ label, error, className, id: idProp, ...props }, ref) {
+  const generatedId = useId()
+  const id = idProp ?? generatedId
   return (
     <FieldShell id={id} label={label} error={error}>
       <textarea

@@ -12,14 +12,15 @@ import { defineConfig } from 'vite'
 const codeSplitting = {
   groups: [
     { name: 'vendor-react', test: /node_modules[/](react|react-dom|scheduler)[/]/, priority: 30 },
+    // Groups pull in their dependencies, so three.js must be claimed before post-processing.
     {
-      name: 'vendor-postfx',
-      test: /node_modules[/](postprocessing|@react-three[/]postprocessing|n8ao|maath)[/]/,
+      name: 'vendor-three',
+      test: /node_modules[/](three|@react-three[/]fiber|its-fine|zustand|suspend-react|react-use-measure)[/]/,
       priority: 20,
     },
     {
-      name: 'vendor-three',
-      test: /node_modules[/](three|@react-three|its-fine|zustand|suspend-react|react-use-measure)[/]/,
+      name: 'vendor-postfx',
+      test: /node_modules[/](postprocessing|@react-three[/]postprocessing|n8ao|maath)[/]/,
       priority: 10,
     },
   ],
