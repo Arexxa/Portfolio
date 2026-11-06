@@ -57,4 +57,15 @@ export const skillGroups: readonly SkillGroup[] = [
     label: 'Machine Learning',
     skills: ['Python', 'TensorFlow / Keras', 'OpenCV', 'Flask', 'Roboflow'],
   },
+  {
+    id: 'ai',
+    label: 'AI-Assisted Dev',
+    skills: [
+      'Windsurf',
+      'Claude',
+      'ChatGPT',
+      'Prompt & context engineering',
+      'AI code review & refactoring',
+    ],
+  },
 ]

@@ -26,7 +26,7 @@ export const sections: readonly SectionMeta[] = [
     title: 'Skills',
     file: 'modules/',
     status: 'LOADED',
-    blurb: 'Installed modules: frontend, backend and data, Web3, cloud and ML.',
+    blurb: 'Installed modules: frontend, backend and data, Web3, cloud, ML and AI tooling.',
     icon: 'chip',
   },
   {
